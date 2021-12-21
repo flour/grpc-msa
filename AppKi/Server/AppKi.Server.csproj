@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Flour.Logging" Version="1.0.22" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ApiOne.Client\ApiOne.Client.csproj" />
+    <ProjectReference Include="..\..\AppKi.Tracing\AppKi.Tracing.csproj" />
+    <ProjectReference Include="..\Client\AppKi.Client.csproj" />
+    <ProjectReference Include="..\Shared\AppKi.Shared.csproj" />
+  </ItemGroup>
+
+
+</Project>
