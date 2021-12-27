@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppKi.Grpc\AppKi.Grpc.csproj" />
+    <PackageReference Include="Flour.Grpc" Version="1.0.24-alpha.0.1" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 using ApiOne.Client;
-using AppKi.Tracing;
 using Flour.Logging;
+using Flour.OTel;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseLogging();
@@ -11,7 +11,8 @@ builder.Services
     .AddControllersWithViews().Services
     .AddRazorPages().Services
     .AddApiOne(builder.Configuration)
-    .AddTracing(builder.Configuration);
+    .AddTracing(builder.Configuration)
+    .AddHeaderPropagation();
 
 var app = builder.Build();
 
@@ -27,9 +28,8 @@ else
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
-
+app.UseHeaderPropagation();
 app.UseRouting();
-
 
 app.MapRazorPages();
 app.MapControllers();

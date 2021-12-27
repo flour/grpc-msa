@@ -1,7 +1,9 @@
+using System.Diagnostics;
 using ApiOne.Client;
 using ApiOne.Client.Contracts.Requests;
 using AppKi.Shared;
 using Microsoft.AspNetCore.Mvc;
+using OpenTelemetry;
 
 namespace AppKi.Server.Controllers
 {
@@ -24,15 +26,20 @@ namespace AppKi.Server.Controllers
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
             _logger.LogInformation("Get Weather");
-            var result = await _service.OneCall(new OneRequest { Query = "test" }, HttpContext.RequestAborted);
+            using var source = new ActivitySource("TestSource");
+            using var activity = source.CreateActivity("TestActivity", ActivityKind.Server);
+            activity?.AddBaggage("test1", "one");
+            
+            
+            var result = await _service.OneCall(new OneRequest {Query = "test"}, HttpContext.RequestAborted);
             _logger.LogInformation("Got Weather response");
             return new List<WeatherForecast>
             {
-                new WeatherForecast
+                new()
                 {
                     Date = result.Date,
                     Summary = result.Summary,
-                    TemperatureC= (int)result.TemperatureC,
+                    TemperatureC = (int) result.TemperatureC,
                 }
             };
         }
