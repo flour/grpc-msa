@@ -11,7 +11,11 @@ builder.Services
     .AddControllersWithViews().Services
     .AddRazorPages().Services
     .AddApiOne(builder.Configuration)
-    .AddTracing(builder.Configuration)
+    .AddTracing(builder.Configuration, (activity, context) =>
+    {
+        activity?.AddBaggage("trace.id", context.HttpContext.TraceIdentifier);
+        activity?.AddBaggage("protocol.name", context.Protocol);
+    })
     .AddHeaderPropagation();
 
 var app = builder.Build();

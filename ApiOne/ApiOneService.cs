@@ -20,11 +20,9 @@ namespace ApiOne
 
         public async ValueTask<OneResponse> OneCall(OneRequest request, CancellationToken token = default)
         {
-            var test = Baggage.Current.GetBaggage("test");
-            var test1 = Baggage.Current.GetBaggage("test1");
-            var test2 = Baggage.Current.GetBaggage("traceId_bag");
+            using var activity = Activity.Current?.Source.CreateActivity("Tha one", ActivityKind.Server);
 
-            test2 = Activity.Current?.Baggage.LastOrDefault(e => e.Key == "traceId_bag").Value;
+            activity?.AddTag("api.two.custom.tag", "tag");
             
             _logger.LogInformation("Api one call: {@Request}", request);
             var result = await _apiTwo.TwoCall(new ApiTwo.Client.Contracts.Requests.TwoRequest

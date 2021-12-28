@@ -26,10 +26,7 @@ namespace AppKi.Server.Controllers
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
             _logger.LogInformation("Get Weather");
-            using var source = new ActivitySource("TestSource");
-            using var activity = source.CreateActivity("TestActivity", ActivityKind.Server);
-            activity?.AddBaggage("test1", "one");
-            
+            Activity.Current?.AddBaggage("user.id", "one");
             
             var result = await _service.OneCall(new OneRequest {Query = "test"}, HttpContext.RequestAborted);
             _logger.LogInformation("Got Weather response");
