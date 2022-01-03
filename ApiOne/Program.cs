@@ -1,7 +1,7 @@
 using ApiOne;
 using ApiTwo.Client;
-using AppKi.Tracing;
 using Flour.Logging;
+using Flour.OTel;
 using ProtoBuf.Grpc.Server;
 
 var builder = WebApplication.CreateBuilder(args);

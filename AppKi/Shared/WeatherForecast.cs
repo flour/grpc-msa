@@ -1,13 +1,13 @@
+using System.Runtime.Serialization;
+
 namespace AppKi.Shared
 {
+    [DataContract]
     public class WeatherForecast
     {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string? Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        [DataMember(Order = 1)] public DateTime Date { get; set; }
+        [DataMember(Order = 2)] public string Description { get; set; }
+        [DataMember(Order = 3)] public int TemperatureC { get; set; }
+        [DataMember(Order = 4)] public string? Summary { get; set; }
     }
 }

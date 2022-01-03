@@ -13,13 +13,15 @@ internal class ApiTwoService : IApiTwoService
         _logger = logger;
     }
 
+    
     public ValueTask<TwoResponse> TwoCall(
         TwoRequest request,
         CancellationToken token = default)
     {
-        using var activity = _activity.StartActivity("Two call", ActivityKind.Server);
-        activity?
-            .AddTag("query", request.Query);
+        using var activity = _activity.StartActivity("Call Two", ActivityKind.Server);
+        activity?.AddTag("query", request.Query);
+
+        var test = Activity.Current?.Baggage.LastOrDefault(e => e.Key == "traceId_bag");
 
         _logger.LogInformation("Api two query: {Query}", request.Query);
 

@@ -1,4 +1,4 @@
-﻿using AppKi.Grpc;
+﻿using Flour.Grpc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
