@@ -1,6 +1,8 @@
 using ApiOne.Client;
+using AppKi.Server.Services;
 using Flour.Logging;
 using Flour.OTel;
+using ProtoBuf.Grpc.Server;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseLogging();
@@ -16,7 +18,8 @@ builder.Services
         activity?.AddBaggage("trace.id", context.HttpContext.TraceIdentifier);
         activity?.AddBaggage("protocol.name", context.Protocol);
     })
-    .AddHeaderPropagation();
+    .AddHeaderPropagation()
+    .AddCodeFirstGrpc();
 
 var app = builder.Build();
 
@@ -34,7 +37,10 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 app.UseHeaderPropagation();
 app.UseRouting();
+app.UseGrpcWeb();
 
+
+app.MapGrpcService<WeatherService>().EnableGrpcWeb();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");

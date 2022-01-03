@@ -2,8 +2,8 @@ using System.Diagnostics;
 using ApiOne.Client;
 using ApiOne.Client.Contracts.Requests;
 using AppKi.Shared;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using OpenTelemetry;
 
 namespace AppKi.Server.Controllers
 {
@@ -39,6 +39,13 @@ namespace AppKi.Server.Controllers
                     TemperatureC = (int) result.TemperatureC,
                 }
             };
+        }
+
+        [HttpGet("stream")]
+        public async IAsyncEnumerable<WeatherForecast> GetStream()
+        {
+            await foreach (var item in _service.StreamCall(new OneRequest {Query = "test-stream"}, HttpContext.RequestAborted))
+                yield return item.Adapt<WeatherForecast>();
         }
     }
 }

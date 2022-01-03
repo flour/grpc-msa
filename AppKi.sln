@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiOne.Client", "ApiOne.Cli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTwo.Client", "ApiTwo.Client\ApiTwo.Client.csproj", "{9CF8E21E-B608-4C68-902C-C9138DB6998D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flour.Otel", "..\flourlibs\src\Flour.Otel\Flour.Otel.csproj", "{D36AD2E5-9142-4696-B32A-89E18DC66B42}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,10 +55,6 @@ Global
 		{9CF8E21E-B608-4C68-902C-C9138DB6998D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CF8E21E-B608-4C68-902C-C9138DB6998D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CF8E21E-B608-4C68-902C-C9138DB6998D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D36AD2E5-9142-4696-B32A-89E18DC66B42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D36AD2E5-9142-4696-B32A-89E18DC66B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D36AD2E5-9142-4696-B32A-89E18DC66B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D36AD2E5-9142-4696-B32A-89E18DC66B42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

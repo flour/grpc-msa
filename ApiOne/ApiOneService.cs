@@ -3,7 +3,6 @@ using ApiOne.Client;
 using ApiOne.Client.Contracts.Requests;
 using ApiOne.Client.Contracts.Responses;
 using ApiTwo.Client;
-using OpenTelemetry;
 
 namespace ApiOne
 {
@@ -23,7 +22,7 @@ namespace ApiOne
             using var activity = Activity.Current?.Source.CreateActivity("Tha one", ActivityKind.Server);
 
             activity?.AddTag("api.two.custom.tag", "tag");
-            
+
             _logger.LogInformation("Api one call: {@Request}", request);
             var result = await _apiTwo.TwoCall(new ApiTwo.Client.Contracts.Requests.TwoRequest
             {
@@ -39,6 +38,26 @@ namespace ApiOne
                 Summary = result.Summary,
                 TemperatureC = result.TemperatureC,
             };
+        }
+
+        public async IAsyncEnumerable<OneResponse> StreamCall(
+            OneRequest request,
+            CancellationToken token = default)
+        {
+            var data = Enumerable.Range(0, 100).Select(e => new OneResponse
+            {
+                Date = DateTime.UtcNow.AddHours(e),
+                Description = $"Weather {DateTime.UtcNow.AddHours(e)}",
+                Id = Guid.NewGuid(),
+                Summary = "tetest",
+                TemperatureC = e % 5
+            });
+
+            foreach (var item in data)
+            {
+                await Task.Delay(100, token);
+                yield return item;
+            }
         }
     }
 }

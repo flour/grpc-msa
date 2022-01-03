@@ -13,6 +13,7 @@ internal class ApiTwoService : IApiTwoService
         _logger = logger;
     }
 
+    
     public ValueTask<TwoResponse> TwoCall(
         TwoRequest request,
         CancellationToken token = default)

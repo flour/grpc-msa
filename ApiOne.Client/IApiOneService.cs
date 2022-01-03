@@ -9,5 +9,8 @@ namespace ApiOne.Client
     {
         [OperationContract]
         ValueTask<OneResponse> OneCall(OneRequest request, CancellationToken token = default);
+
+        [OperationContract]
+        IAsyncEnumerable<OneResponse> StreamCall(OneRequest request, CancellationToken token = default);
     }
 }

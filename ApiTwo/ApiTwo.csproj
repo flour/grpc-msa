@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Flour.Logging" Version="1.0.24-alpha.0.1" />
+    <PackageReference Include="Flour.Otel" Version="1.0.25-alpha.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="protobuf-net.Grpc.AspNetCore" Version="1.0.152" />
     <PackageReference Include="protobuf-net.Grpc.AspNetCore.Reflection" Version="1.0.152" />
