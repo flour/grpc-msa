@@ -59,5 +59,26 @@ namespace ApiOne
                 yield return item;
             }
         }
+
+        public async ValueTask<Result> StoreStream(
+            IAsyncEnumerable<SomeData> request,
+            CancellationToken token = default)
+        {
+            await foreach (var item in request.WithCancellation(token))
+            {
+                try
+                {
+                    if (item.Number > 0 && item.Number % 200 == 0)
+                        _logger.LogInformation("Got item: {@Data}", item);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Could not process {@Item}", item);
+                    return new Result {Message = $"Error: {e.Message}"};
+                }
+            }
+
+            return new Result {Message = "Ok", Success = true};
+        }
     }
 }

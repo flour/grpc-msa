@@ -12,5 +12,8 @@ namespace ApiOne.Client
 
         [OperationContract]
         IAsyncEnumerable<OneResponse> StreamCall(OneRequest request, CancellationToken token = default);
+
+        [OperationContract]
+        ValueTask<Result> StoreStream(IAsyncEnumerable<SomeData> request, CancellationToken token = default);
     }
 }

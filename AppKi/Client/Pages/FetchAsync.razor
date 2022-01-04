@@ -5,39 +5,32 @@
 
 <h3>FetchAsync</h3>
 
-@if (_forecasts is null)
-{
-    <p>Loading...</p>
-}
 
-@if (_forecasts is not null)
-{
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Temp. (C)</th>
+        <th>Summary</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var forecast in _forecasts)
+    {
         <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Summary</th>
-            <th>Description</th>
+            <td>@forecast.Date.ToShortDateString()</td>
+            <td>@forecast.TemperatureC</td>
+            <td>@forecast.Summary</td>
+            <td>@forecast.Description</td>
         </tr>
-        </thead>
-        <tbody>
-        @foreach (var forecast in _forecasts)
-        {
-            <tr>
-                <td>@forecast.Date.ToShortDateString()</td>
-                <td>@forecast.TemperatureC</td>
-                <td>@forecast.Summary</td>
-                <td>@forecast.Description</td>
-            </tr>
-        }
-        </tbody>
-    </table>
-}
+    }
+    </tbody>
+</table>
 
 @code {
 
-    private List<WeatherForecast> _forecasts = new();
+    private readonly List<WeatherForecast> _forecasts = new();
 
     protected override async Task OnInitializedAsync()
     {
